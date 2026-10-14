@@ -18,6 +18,8 @@ export function efekDesktopBoleh(): boolean {
   return matchMedia(KUERI_EFEK_DESKTOP).matches && !koneksi?.saveData;
 }
 
-export const SKRIP_GERBANG_EFEK = `(function(){try{var c=navigator.connection;if(matchMedia(${JSON.stringify(
+// Tanpa try/catch: satu-satunya yang bisa gagal adalah browser tanpa
+// `matchMedia`, dan itu diperiksa lebih dulu, jadi browser itu tetap versi ringan.
+export const SKRIP_GERBANG_EFEK = `(function(){var c=navigator.connection;if(window.matchMedia&&matchMedia(${JSON.stringify(
   KUERI_EFEK_DESKTOP,
-)}).matches&&!(c&&c.saveData))document.documentElement.dataset.efek="desktop"}catch(e){}})();`;
+)}).matches&&!(c&&c.saveData))document.documentElement.dataset.efek="desktop"})();`;
